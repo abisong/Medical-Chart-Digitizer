@@ -13,6 +13,7 @@ import { DocumentArchive } from './components/DocumentArchive';
 import * as authService from './services/authService';
 import { Login } from './components/auth/Login';
 import { Register } from './components/auth/Register';
+import { populateDemoData } from './services/demoDataService';
 
 const SparklesIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1zM12 2a1 1 0 01.967.744L14.146 7.2l4.45.222a1 1 0 01.815 1.588l-3.328 3.014.99 4.545a1 1 0 01-1.482 1.054L12 15.54l-3.59 2.051a1 1 0 01-1.482-1.054l.99-4.545L4.602 9.01a1 1 0 01.815-1.588l4.45-.222L11.033 2.744A1 1 0 0112 2z" clipRule="evenodd" /></svg>;
 const SaveIcon = () => <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path d="M7.707 10.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V6h5a2 2 0 012 2v7a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2h5v5.586l-1.293-1.293zM9 4a1 1 0 012 0v2H9V4z" /></svg>;
@@ -46,6 +47,9 @@ const App: React.FC = () => {
     if (currentUser) {
       const fetchRecords = async () => {
         try {
+          // Populate demo data if it's the first time
+          await populateDemoData();
+
           const recordsFromDb = await getAllRecords();
           setSavedRecords(recordsFromDb);
         } catch (e) {
