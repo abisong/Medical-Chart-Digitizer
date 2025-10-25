@@ -1,0 +1,7 @@
+{
+  "name": "Medical Chart Digitizer",
+  "description": "An application to scan handwritten or typed medical documents using AI and digitize the patient information into a structured format.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
